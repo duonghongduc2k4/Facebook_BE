@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 
 @Data
@@ -22,4 +23,6 @@ public class Account {
     private LocalDate birthDay;
     private int friend;
     private String image;
+
+    private LocalDateTime createdAt = LocalDateTime.now();
 }

@@ -1,10 +1,9 @@
 package com.example.facebook_be.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.List;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -14,11 +13,13 @@ public class Friend {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long accAddFriend;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private Account user;
 
-    @ManyToOne
-    @JoinColumn(name = "id_account")
-    @JsonIgnore
-    private Account account;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "friend_id", nullable = false)
+    private Account friend;
 
+    private LocalDateTime friendshipCreatedAt = LocalDateTime.now();
 }
